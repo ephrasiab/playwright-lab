@@ -52,10 +52,7 @@ Two failures while writing it, both diagnosed from the error output alone:
 Both are a fair summary of the change in mindset: the tool refuses ambiguity and tells
 you what the page actually looked like.
 
-## Next
+## Plan
 
-- Locator strategy: `getByRole` against a component library that keeps changing its DOM
-- `storageState` and fixtures: authenticate once, including a TOTP/MFA flow
-- API testing with the `request` fixture, and talking to a database from a test
-- Config, sharding and reporters on CI (Azure DevOps)
-- Trace Viewer as a debugging tool rather than a last resort
+See [LEARNING_PLAN.md](LEARNING_PLAN.md) for the full lesson list, the rules this repo
+follows, and the practice apps used.
