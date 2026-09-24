@@ -15,7 +15,7 @@ Each lesson: roughly an hour, one spec file, notes in the README, one commit.
 | # | Lesson | Covers | The problem it answers |
 |---|---|---|---|
 | 01 | Basics | `async/await`, lazy locators, auto-waiting, web-first assertions, strict mode | done |
-| 02 | Locator strategy | `getByRole` and the a11y tree, `filter()`, chaining, `testIdAttribute` config, when CSS is still right | a component library drops its test ids and 40 tests break |
+| 02 | Locator strategy | `getByRole` and the a11y tree, `filter()`, chaining, `testIdAttribute` config, when CSS is still right | done |
 | 03 | Authenticate once | `storageState`, a `setup` project with `dependencies`, TOTP generation in a fixture, per-role sessions | a login/MFA hiccup cascading into every later test |
 | 04 | Fixtures and page objects | custom fixtures vs POM, test-scoped vs worker-scoped, fixture composition, `test.step` | shared setup that used to live in hooks and global state |
 | 05 | API in tests | `request` fixture, create data by API and verify in UI, `page.route` for mocking, API-only specs | slow UI setup, and tests that fail for reasons unrelated to what they check |

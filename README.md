@@ -52,6 +52,37 @@ Two failures while writing it, both diagnosed from the error output alone:
 Both are a fair summary of the change in mindset: the tool refuses ambiguity and tells
 you what the page actually looked like.
 
+### 02 - locator strategy
+`tests/02-locators.spec.js` (against saucedemo.com)
+
+The question behind it: why did forty tests break when a component library dropped
+its test ids, while the page looked identical to a user? Because the tests described
+markup, not behaviour. The lesson works down Playwright's preference order -
+`getByRole`, then label/placeholder/text, then `getByTestId`, then CSS - and one test
+strips every `data-test` attribute from the live page to show the role-based
+locators still pass.
+
+- **`testIdAttribute`** - the app uses `data-test`, not `data-testid`. Without the
+  setting `getByTestId('username')` matches nothing, and it does not throw; a locator
+  is only a query. One line in `use` fixes it.
+- **Identical elements** - six buttons all named "Add to cart". `nth(4)` works until
+  the sort order changes. `filter({ hasText })` on the product card, then the button
+  inside it, names the product the test is about.
+- **`filter({ has })` / `filter({ hasNot })`** - "cards containing a Remove button"
+  reads the cart state straight off the page.
+- **`allTextContents()` does not retry** - assert something that does retry first,
+  then read the column and compare it in plain JavaScript.
+- **`toMatchAriaSnapshot`** - asserts a region's structure in one block; useful for
+  small regions, brittle for whole pages.
+
+One failure while writing it:
+
+1. **`getByRole('link', { name: 'Logout' })` found nothing.** The element is an `<a>`
+   in the HTML, but with no `href` the accessibility tree reports it as a **button**.
+   The error context printed the tree and showed `button "Logout"` right away. Role
+   comes from the tree, not the tag, so read `ariaSnapshot()` before writing role
+   locators instead of guessing from DevTools.
+
 ## Plan
 
 See [LEARNING_PLAN.md](LEARNING_PLAN.md) for the full lesson list, the rules this repo
